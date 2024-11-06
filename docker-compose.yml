@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  ml-env:
+    image: continuumio/miniconda3:latest
+    container_name: ml-env
+    volumes:
+      - ./setup_inicial.py:/opt/ml/setup_inicial.py   # Sincroniza o script Python
+      - ./data/raw:/opt/ml/data/raw                   # Sincroniza a pasta de dados
+    environment:
+      - PYTHONUNBUFFERED=1                            # Para saída em tempo real no terminal
+    command: >
+      /bin/bash -c "
+        conda install -y --quiet pandas matplotlib plotly seaborn scikit-learn tensorflow && 
+        python /opt/ml/setup_inicial.py
+      "
