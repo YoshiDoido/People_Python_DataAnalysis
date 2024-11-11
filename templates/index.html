@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine Learning Test</title>
+</head>
+<body>
+    <h1>Teste de Aprendizado de Máquina</h1>
+    <form method="POST">
+        <label for="expected_results">Resultados Esperados (ex: 1,1,0,0,1):</label><br>
+        <input type="text" id="expected_results" name="expected_results"><br><br>
+        
+        <label for="predicted_results">Resultados Previstos (ex: 1,0,1,0,1):</label><br>
+        <input type="text" id="predicted_results" name="predicted_results"><br><br>
+
+        <input type="submit" value="Executar Teste">
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    
+    {% if accuracy %}
+        <h2>Métricas de Avaliação</h2>
+        <p>Precisão (Accuracy): {{ accuracy }}</p>
+        <p>Precisão (Precision): {{ precision }}</p>
+        <p>Revocação (Recall): {{ recall }}</p>
+        <p>F1 Score: {{ f1 }}</p>
+        <h3>Matriz de Confusão:</h3>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Matriz de Confusão">
+    {% endif %}
+</body>
+</html>
